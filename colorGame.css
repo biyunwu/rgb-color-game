@@ -1,0 +1,26 @@
+body {
+  background-color: black;
+}
+
+h1 {
+  color: white;
+}
+
+#colorSpan {
+  text-transform: uppercase;
+}
+
+#container {
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.colorBlock {
+  width: 30%;
+  margin: 1.66666666%;
+  padding-bottom: 30%;
+  float: left;
+  border-radius: 10%;
+  background-color: grey;
+  cursor: pointer;
+}
