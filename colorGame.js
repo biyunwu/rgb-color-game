@@ -1,14 +1,12 @@
-function getRandomColors(){
+// Get an array of 6 random rgb colors.
+let colors = function(){
   let colors = [];
   let r = function () { return Math.floor(Math.random()*256) };
   for(let i=0; i<6; i++){
     colors.push("rgb(" + r() + ", " + r() + ", " + r() + ")");
   }
   return colors;
-}
-
-// Get an array of 6 random rgb colors.
-let colors = getRandomColors();
+}();
 
 // Choose a color's rgb value randomly and display in the h1 element.
 let colorSpan = document.getElementById("colorSpan");
@@ -37,6 +35,7 @@ function actions(){
     changeOthersColorAndRemoveEventListeners(selectedColor);
   } else {
     this.style.backgroundColor = "black";
+    this.removeEventListener("click", actions);
     result.textContent = "Try Again!"
   }
 }
