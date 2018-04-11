@@ -31,3 +31,7 @@ body {
 button, .colorBlock{
   cursor: pointer;
 }
+
+.default {
+  background-color: blue;
+}

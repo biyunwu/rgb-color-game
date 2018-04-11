@@ -1,11 +1,21 @@
 let colorSpan = document.getElementById("colorSpan");
-let colorElements = document.querySelectorAll(".colorBlock");
+let colorElements = getColorBlocks();
 let title = document.querySelector("h1");
 let result = document.querySelector("#result");
 let reset = document.querySelector("#stripe #reset");
+let blockNum = colorElements.length;
+let easy = document.getElementById("easy");
+let hard = document.getElementById("hard");
+// let modes = document.querySelectorAll(".mode");
+
+function getColorBlocks(){
+  return document.querySelectorAll(".colorBlock");
+}
 
 // Get an array of 6 random rgb colors.
 let colors = generateRandomColors(6);
+// Pick a random color from the arr to be guessed.
+colorSpan.textContent = pickColor();
 
 function generateRandomColors(num){
   let colors = [];
@@ -15,8 +25,6 @@ function generateRandomColors(num){
   }
   return colors;
 };
-
-colorSpan.textContent = pickColor();
 
 function pickColor(){
   return colors[Math.floor(Math.random()*colors.length)];
@@ -46,19 +54,48 @@ function actions(){
   }
 }
 
+// Helper method
 function changeOthersColor(rgbColorValue){
   for(let i=0; i<colorElements.length; i++){
     colorElements[i].style.backgroundColor = rgbColorValue;
   }
 }
 
-reset.addEventListener("click", function(){
+// Method for "New Colors" button.
+reset.addEventListener("click", resetPage);
+
+function resetPage(){
   reset.textContent = "New Colors";
-  colors = generateRandomColors(6);
+  colors = generateRandomColors(blockNum);
   colorSpan.textContent = pickColor();
   title.style.backgroundColor = "";
   result.textContent = "";
-  for(let i=0; i<colorElements.length; i++){
+  for(let i=0; i<blockNum; i++){
     colorElements[i].style.backgroundColor = colors[i];
   }
-});
+}
+
+// Change difficulty
+easy.addEventListener("click", toggleMode);
+hard.addEventListener("click", toggleMode);
+
+function toggleMode(){
+  if (this.classList.contains("default")){
+    resetPage();
+  } else {
+    easy.classList.toggle("default");
+    hard.classList.toggle("default");
+    changeMode();
+  }
+}
+
+// Helper method
+function changeMode(){
+  let allBlocks = document.getElementById("container").children;
+  for (let i=3; i<allBlocks.length; i++){
+    allBlocks[i].classList.toggle("colorBlock");
+  }
+  colorElements = getColorBlocks();
+  blockNum = colorElements.length;
+  resetPage();
+}
