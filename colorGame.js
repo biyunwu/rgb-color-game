@@ -4,9 +4,9 @@ let title = document.querySelector("h1");
 let result = document.querySelector("#result");
 let reset = document.querySelector("#stripe #reset");
 let blockNum = colorElements.length;
-let easy = document.getElementById("easy");
-let hard = document.getElementById("hard");
-// let modes = document.querySelectorAll(".mode");
+let modes = document.querySelectorAll(".mode");
+// let easy = document.getElementById("easy");
+// let hard = document.getElementById("hard");
 
 function getColorBlocks(){
   return document.querySelectorAll(".colorBlock");
@@ -76,15 +76,17 @@ function resetPage(){
 }
 
 // Change difficulty
-easy.addEventListener("click", toggleMode);
-hard.addEventListener("click", toggleMode);
+modes.forEach(function(el){
+  el.addEventListener("click", toggleMode);
+});
 
 function toggleMode(){
   if (this.classList.contains("default")){
     resetPage();
   } else {
-    easy.classList.toggle("default");
-    hard.classList.toggle("default");
+    modes.forEach(function(el){
+      el.classList.toggle("default");
+    });
     changeMode();
   }
 }
