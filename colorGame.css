@@ -1,15 +1,28 @@
 body {
   background-color: black;
   color: white;
+  margin: 0 auto;
+  font-family: 'Roboto', sans-serif;
+
+}
+
+h1 {
+  text-align: center;
+  margin: 0 auto;
+  background-color: steelblue;
+  text-transform: uppercase;
+  font-weight: 300;
+  line-height: 1.1;
 }
 
 #colorSpan {
-  text-transform: uppercase;
+  font-size: 120%;
+  font-weight: 500;
 }
 
 #container {
   max-width: 600px;
-  margin: 0 auto;
+  margin: 20px auto;
 }
 
 .colorBlock {
@@ -19,6 +32,9 @@ body {
   float: left;
   border-radius: 10%;
   background-color: grey;
+  transition: background-color, 0.5s;
+  -webkit-transition: background-color, 0.5s;
+  -moz-transition: background-color, 0,5s;
 }
 
 #stripe {
@@ -28,10 +44,31 @@ body {
   text-align: center;
 }
 
+button {
+  text-transform: uppercase;
+  font-size: inherit;
+  border: none;
+  background-color: transparent;
+  height: 100%;
+  transition: all, 0.2s;
+  -webkit-transition: all, 0.2s;
+  -moz-transition: all, 0,2s;
+}
+
+button:hover {
+  background-color: steelblue;
+  color: white;
+}
+
 button, .colorBlock{
   cursor: pointer;
 }
 
+#result {
+  display: inline-block;
+  width: 20%;
+}
+
 .default {
-  background-color: blue;
+  background-color: steelblue;
 }

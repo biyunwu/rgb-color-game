@@ -3,27 +3,24 @@ let colorElements = getColorBlocks();
 let title = document.querySelector("h1");
 let result = document.querySelector("#result");
 let reset = document.querySelector("#stripe #reset");
-let blockNum = colorElements.length;
 let modes = document.querySelectorAll(".mode");
-// let easy = document.getElementById("easy");
-// let hard = document.getElementById("hard");
 
 function getColorBlocks(){
   return document.querySelectorAll(".colorBlock");
 }
 
 // Get an array of 6 random rgb colors.
-let colors = generateRandomColors(6);
+let colors = generateRandomColors(colorElements.length);
 // Pick a random color from the arr to be guessed.
 colorSpan.textContent = pickColor();
 
 function generateRandomColors(num){
-  let colors = [];
-  let r = function () { return Math.floor(Math.random()*256) };
+  let colorArray = [];
+  let r = function(){return Math.floor(Math.random()*256);};
   for(let i=0; i<num; i++){
-    colors.push("rgb(" + r() + ", " + r() + ", " + r() + ")");
+    colorArray.push("rgb(" + r() + ", " + r() + ", " + r() + ")");
   }
-  return colors;
+  return colorArray;
 };
 
 function pickColor(){
@@ -66,27 +63,23 @@ reset.addEventListener("click", resetPage);
 
 function resetPage(){
   reset.textContent = "New Colors";
-  colors = generateRandomColors(blockNum);
+  colors = generateRandomColors(colorElements.length);
   colorSpan.textContent = pickColor();
   title.style.backgroundColor = "";
   result.textContent = "";
-  for(let i=0; i<blockNum; i++){
+  for(let i=0; i<colorElements.length; i++){
     colorElements[i].style.backgroundColor = colors[i];
   }
 }
 
 // Change difficulty
-modes.forEach(function(el){
-  el.addEventListener("click", toggleMode);
-});
+modes.forEach(function(el){el.addEventListener("click", toggleMode);});
 
 function toggleMode(){
   if (this.classList.contains("default")){
     resetPage();
   } else {
-    modes.forEach(function(el){
-      el.classList.toggle("default");
-    });
+    modes.forEach(function(el){el.classList.toggle("default");});
     changeMode();
   }
 }
@@ -98,6 +91,5 @@ function changeMode(){
     allBlocks[i].classList.toggle("colorBlock");
   }
   colorElements = getColorBlocks();
-  blockNum = colorElements.length;
   resetPage();
 }
