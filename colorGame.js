@@ -1,20 +1,26 @@
-// Get an array of 6 random rgb colors.
-let colors = function(){
-  let colors = [];
-  let r = function () { return Math.floor(Math.random()*256) };
-  for(let i=0; i<6; i++){
-    colors.push("rgb(" + r() + ", " + r() + ", " + r() + ")");
-  }
-  return colors;
-}();
-
-// Choose a color's rgb value randomly and display in the h1 element.
 let colorSpan = document.getElementById("colorSpan");
-colorSpan.textContent = colors[Math.floor(Math.random()*colors.length)];
-
 let colorElements = document.querySelectorAll(".colorBlock");
 let title = document.querySelector("h1");
 let result = document.querySelector("#result");
+let reset = document.querySelector("#stripe #reset");
+
+// Get an array of 6 random rgb colors.
+let colors = generateRandomColors(6);
+
+function generateRandomColors(num){
+  let colors = [];
+  let r = function () { return Math.floor(Math.random()*256) };
+  for(let i=0; i<num; i++){
+    colors.push("rgb(" + r() + ", " + r() + ", " + r() + ")");
+  }
+  return colors;
+};
+
+colorSpan.textContent = pickColor();
+
+function pickColor(){
+  return colors[Math.floor(Math.random()*colors.length)];
+}
 
 for(let i=0; i<colorElements.length; i++){
   // Assign colors to colorBlocks.
@@ -32,17 +38,27 @@ function actions(){
     title.style.backgroundColor = curColor;
     result.textContent = "Correct!"
     // Change other colorBlocks' background color.
-    changeOthersColorAndRemoveEventListeners(selectedColor);
+    changeOthersColor(selectedColor);
+    reset.textContent = "Play Again!"
   } else {
     this.style.backgroundColor = "black";
-    this.removeEventListener("click", actions);
     result.textContent = "Try Again!"
   }
 }
 
-function changeOthersColorAndRemoveEventListeners(rgbColorValue){
+function changeOthersColor(rgbColorValue){
   for(let i=0; i<colorElements.length; i++){
     colorElements[i].style.backgroundColor = rgbColorValue;
-    colorElements[i].removeEventListener("click", actions);
   }
 }
+
+reset.addEventListener("click", function(){
+  reset.textContent = "New Colors";
+  colors = generateRandomColors(6);
+  colorSpan.textContent = pickColor();
+  title.style.backgroundColor = "";
+  result.textContent = "";
+  for(let i=0; i<colorElements.length; i++){
+    colorElements[i].style.backgroundColor = colors[i];
+  }
+});

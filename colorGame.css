@@ -1,8 +1,5 @@
 body {
   background-color: black;
-}
-
-h1, #result {
   color: white;
 }
 
@@ -22,5 +19,15 @@ h1, #result {
   float: left;
   border-radius: 10%;
   background-color: grey;
+}
+
+#stripe {
+  background-color: white;
+  height: 30px;
+  color: black;
+  text-align: center;
+}
+
+button, .colorBlock{
   cursor: pointer;
 }
